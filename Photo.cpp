@@ -1,8 +1,6 @@
 #include <stdlib.h>
 #include <algorithm>
 
-using namespace std;
-
 #include "Photo.h"
 
 Photo::Photo() {
