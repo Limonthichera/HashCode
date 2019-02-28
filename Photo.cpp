@@ -7,8 +7,9 @@ using namespace std;
 
 #include "Photo.h"
 
-Photo::Photo(vector<string> tagList) {
+Photo::Photo(vector<string> tagList, char type) {
     tags.reserve(tagList.size());
+    this->type = type;
 
     // Saving tags in internal storage
     for (unsigned int i = 0; i < tagList.size(); i++) {
