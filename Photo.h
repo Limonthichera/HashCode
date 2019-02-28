@@ -1,3 +1,6 @@
+#include <vector>
+#include <string>
+
 class Photo {
     public:
     vector<string> tags;
@@ -5,5 +8,6 @@ class Photo {
 
     Photo(vector<string> tagList, char type);
     vector<string> getIntersection(Photo photo);
+    vector<string> getReunion(Photo photo);
 
 };

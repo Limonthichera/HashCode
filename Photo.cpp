@@ -1,6 +1,4 @@
 #include <stdlib.h>
-#include <vector>
-#include <string>
 #include <algorithm>
 
 using namespace std;
@@ -59,4 +57,48 @@ vector<string> Photo::getIntersection(Photo photo) {
     }
 
     return commonTags;
+}
+
+// Get the all tags of this photo and received photo
+vector<string> Photo::getReunion(Photo photo) {
+    vector<string> reunionTags;
+    reunionTags.reserve(1);
+
+    unsigned int thisIdx = 0, otherIdx = 0;
+
+    // Compare in a similar fashion to merge() of Merge Sort
+
+    for (unsigned int i = 0; i < tags.size() + photo.tags.size() - 1; i++) {
+        // Common element
+        int compareResult = tags.at(thisIdx).compare(photo.tags.at(otherIdx));
+
+        if (!compareResult) {
+            // Avoid overflowing the vector
+            if (reunionTags.size() == reunionTags.capacity()) {
+                reunionTags.resize(reunionTags.capacity() * 2);
+            }
+            reunionTags.push_back(tags.at(thisIdx));
+            i++;
+            thisIdx++;
+            otherIdx++;
+            continue;
+        }
+
+        // Element in this > Element in other
+        if (compareResult > 0) {
+            // add tag in other photo and increment tag idx
+            reunionTags.push_back(photo.tags.at(otherIdx));
+            otherIdx++;
+            continue;
+        }
+
+        // Element in this < Element in other
+        // here compareResult surely is < 0
+        // add tag in this photo and increment tag idx
+        reunionTags.push_back(tags.at(thisIdx));
+        thisIdx++;
+        continue;
+    }
+
+    return reunionTags;
 }
