@@ -5,6 +5,10 @@ using namespace std;
 
 #include "Photo.h"
 
+Photo::Photo() {
+    ;
+}
+
 Photo::Photo(vector<string> tagList, char type) {
     tags.reserve(tagList.size());
     this->type = type;
